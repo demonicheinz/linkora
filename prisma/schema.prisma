@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String  @id @default(cuid())
+  email     String  @unique
+  password  String
+  name      String
+  username  String  @unique
+  bio       String?
+  avatarUrl String?
+  bannerUrl String?
+
+  // Profile display
+  displayName String?
+
+  // Header layout
+  headerLayout String @default("classic") // "classic" | "hero" | "banner" | "shape"
+  avatarShape  String @default("flower")  // "flower" | "oval" | "rounded" | "burst"
+
+  // Theme
+  theme String @default("default")
+
+  // Wallpaper
+  wallpaperStyle    String  @default("fill") // "fill" | "gradient" | "blur" | "pattern" | "image" | "video"
+  wallpaperColor    String  @default("#0A0A0A")
+  wallpaperGradient String  @default("linear-gradient(180deg,#667eea,#764ba2)")
+  gradientDirection String  @default("linear-top") // "linear-top" | "linear-bottom" | "radial"
+  gradientNoise     Boolean @default(false)
+  wallpaperPattern  String  @default("grid") // "grid" | "morph" | "organic" | "matrix"
+  wallpaperImageUrl String?
+  wallpaperVideoUrl String?
+  videoCropX        Float?
+  videoCropY        Float?
+  videoCropWidth    Float?
+  videoCropHeight   Float?
+  wallpaperBlur     Int     @default(10)
+
+  // Image / Video effects
+  imageEffect String @default("none")
+  imageTint   Int    @default(10)
+  videoTint   Int    @default(10)
+
+  // Text
+  pageFontFamily  String  @default("inter")
+  pageTextColor   String  @default("#EAEAEA")
+  altTitleFont    Boolean @default(false)
+  titleFontFamily String  @default("inter")
+  titleColor      String  @default("#FFFFFF")
+  bioColor        String  @default("#AAAAAA")
+
+  // Button
+  buttonStyle       String @default("solid")  // "solid" | "glass" | "outline"
+  buttonShadow      String @default("none")   // "none" | "soft" | "strong" | "hard"
+  buttonCorner      String @default("medium") // "sharp" | "small" | "medium" | "large" | "pill"
+  buttonColor       String @default("#2A2A2A")
+  buttonTextColor   String @default("#EAEAEA")
+  buttonShadowColor String @default("#000000")
+
+  // Footer
+  hideFooter       Boolean @default(false)
+  customFooterText String  @default("Buat Linkora-mu")
+  customFooterUrl  String  @default("https://linkora.heinz.id")
+
+  createdAt DateTime @default(now())
+
+  links Link[]
+  views View[]
+}
+
+model Link {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title String
+  url   String
+  icon  String?
+
+  // TODO: PLANNED — Thumbnail untuk link card preview
+  thumbnailUrl String?
+
+  color String?
+
+  // TODO: PLANNED — Tipe link (social embed, header separator, dll)
+  type String @default("url")
+
+  isActive Boolean @default(true)
+  isPinned Boolean @default(false)
+  order    Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clicks Click[]
+
+  @@index([userId, order])
+}
+
+model Click {
+  id     String @id @default(cuid())
+  linkId String
+  link   Link   @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  clickedAt DateTime @default(now())
+
+  device   String?
+  browser  String?
+  os       String?
+  country  String?
+  city     String?
+  referrer String?
+  ipHash   String?
+
+  @@index([linkId, clickedAt])
+}
+
+model View {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  viewedAt DateTime @default(now())
+
+  device   String?
+  browser  String?
+  country  String?
+  referrer String?
+
+  @@index([userId, viewedAt])
+}

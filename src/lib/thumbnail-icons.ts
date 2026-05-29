@@ -1,0 +1,132 @@
+import {
+  BookIcon,
+  BookmarkIcon,
+  BriefcaseIcon,
+  CalendarIcon,
+  CameraIcon,
+  CodeIcon,
+  CoffeeIcon,
+  DiscordLogoIcon,
+  EnvelopeIcon,
+  FacebookLogoIcon,
+  GameControllerIcon,
+  GithubLogoIcon,
+  GlobeIcon,
+  HeartIcon,
+  InstagramLogoIcon,
+  LinkedinLogoIcon,
+  LinkIcon,
+  MapPinIcon,
+  MusicNotesIcon,
+  PhoneIcon,
+  PinterestLogoIcon,
+  RedditLogoIcon,
+  ShoppingBagIcon,
+  SnapchatLogoIcon,
+  SparkleIcon,
+  StarIcon,
+  StorefrontIcon,
+  TelegramLogoIcon,
+  TicketIcon,
+  TiktokLogoIcon,
+  TwitchLogoIcon,
+  TwitterLogoIcon,
+  UserIcon,
+  WhatsappLogoIcon,
+  YoutubeLogoIcon,
+} from "@phosphor-icons/react";
+
+export function isImageUrl(str: string | null | undefined): boolean {
+  if (!str) return false;
+  return (
+    str.startsWith("http://") ||
+    str.startsWith("https://") ||
+    str.startsWith("//")
+  );
+}
+
+export const ALL_ICONS_MAP: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
+  InstagramLogo: InstagramLogoIcon,
+  FacebookLogo: FacebookLogoIcon,
+  TwitterLogo: TwitterLogoIcon,
+  YoutubeLogo: YoutubeLogoIcon,
+  LinkedinLogo: LinkedinLogoIcon,
+  GithubLogo: GithubLogoIcon,
+  TiktokLogo: TiktokLogoIcon,
+  TwitchLogo: TwitchLogoIcon,
+  PinterestLogo: PinterestLogoIcon,
+  SnapchatLogo: SnapchatLogoIcon,
+  WhatsappLogo: WhatsappLogoIcon,
+  TelegramLogo: TelegramLogoIcon,
+  DiscordLogo: DiscordLogoIcon,
+  RedditLogo: RedditLogoIcon,
+  Globe: GlobeIcon,
+  Link: LinkIcon,
+  Envelope: EnvelopeIcon,
+  Phone: PhoneIcon,
+  MapPin: MapPinIcon,
+  Calendar: CalendarIcon,
+  User: UserIcon,
+  Heart: HeartIcon,
+  Star: StarIcon,
+  Bookmark: BookmarkIcon,
+  Sparkle: SparkleIcon,
+  Code: CodeIcon,
+  MusicNotes: MusicNotesIcon,
+  GameController: GameControllerIcon,
+  Briefcase: BriefcaseIcon,
+  Camera: CameraIcon,
+  Storefront: StorefrontIcon,
+  ShoppingBag: ShoppingBagIcon,
+  Book: BookIcon,
+  Coffee: CoffeeIcon,
+  Ticket: TicketIcon,
+};
+
+export const getIconComp = (
+  name: string,
+): React.ComponentType<{ className?: string }> | undefined => {
+  const baseName = name.endsWith("Icon") ? name.slice(0, -4) : name;
+  return ALL_ICONS_MAP[baseName];
+};
+
+export const POPULAR_ICONS = [
+  { name: "InstagramLogo", label: "Instagram", Icon: InstagramLogoIcon },
+  { name: "FacebookLogo", label: "Facebook", Icon: FacebookLogoIcon },
+  { name: "TwitterLogo", label: "Twitter / X", Icon: TwitterLogoIcon },
+  { name: "YoutubeLogo", label: "YouTube", Icon: YoutubeLogoIcon },
+  { name: "LinkedinLogo", label: "LinkedIn", Icon: LinkedinLogoIcon },
+  { name: "GithubLogo", label: "GitHub", Icon: GithubLogoIcon },
+  { name: "TiktokLogo", label: "TikTok", Icon: TiktokLogoIcon },
+  { name: "TwitchLogo", label: "Twitch", Icon: TwitchLogoIcon },
+  { name: "PinterestLogo", label: "Pinterest", Icon: PinterestLogoIcon },
+  { name: "SnapchatLogo", label: "Snapchat", Icon: SnapchatLogoIcon },
+  { name: "WhatsappLogo", label: "WhatsApp", Icon: WhatsappLogoIcon },
+  { name: "TelegramLogo", label: "Telegram", Icon: TelegramLogoIcon },
+  { name: "DiscordLogo", label: "Discord", Icon: DiscordLogoIcon },
+  { name: "RedditLogo", label: "Reddit", Icon: RedditLogoIcon },
+  { name: "Globe", label: "Website", Icon: GlobeIcon },
+  { name: "Link", label: "Link", Icon: LinkIcon },
+  { name: "Envelope", label: "Email", Icon: EnvelopeIcon },
+  { name: "Phone", label: "Phone", Icon: PhoneIcon },
+  { name: "MapPin", label: "Location", Icon: MapPinIcon },
+  { name: "Calendar", label: "Calendar", Icon: CalendarIcon },
+  { name: "User", label: "User / Profile", Icon: UserIcon },
+  { name: "Heart", label: "Heart", Icon: HeartIcon },
+  { name: "Star", label: "Star", Icon: StarIcon },
+  { name: "Bookmark", label: "Bookmark", Icon: BookmarkIcon },
+  { name: "Sparkle", label: "Sparkle", Icon: SparkleIcon },
+  { name: "Code", label: "Code", Icon: CodeIcon },
+  { name: "MusicNotes", label: "Music", Icon: MusicNotesIcon },
+  { name: "GameController", label: "Gaming", Icon: GameControllerIcon },
+  { name: "Briefcase", label: "Work / Business", Icon: BriefcaseIcon },
+  { name: "Camera", label: "Photography", Icon: CameraIcon },
+  { name: "Storefront", label: "Shop / Store", Icon: StorefrontIcon },
+  { name: "ShoppingBag", label: "Shopping Bag", Icon: ShoppingBagIcon },
+  { name: "Book", label: "Book / Read", Icon: BookIcon },
+  { name: "Coffee", label: "Coffee", Icon: CoffeeIcon },
+  { name: "Ticket", label: "Ticket", Icon: TicketIcon },
+];
